@@ -1,0 +1,10 @@
+mat-card-header {
+  justify-content: space-between;
+  align-items: center;
+
+  mat-card-title{
+    font-size: 16px;
+    font-weight: 500;
+    color: red;
+  }
+}

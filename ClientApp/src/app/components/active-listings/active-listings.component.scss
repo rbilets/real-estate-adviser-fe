@@ -1,0 +1,39 @@
+
+
+.filter-container,
+.header-container {
+  display: flex;
+  gap: 10px;
+}
+
+.header-container{
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 15px;
+}
+
+.listings-container {
+  display: flex;
+
+  .table-container {
+    max-height: calc(100vh - 200px);
+    overflow: auto;
+
+    tr,
+    th {
+      height: 30px !important;
+    }
+
+    tr.mat-mdc-row:hover {
+      cursor: pointer;
+      background-color: rgb(206, 250, 236);
+    }
+  }
+
+  .map-container {
+    width: 100%;
+    max-height: calc(100vh - 200px);
+
+    // height: 400px;
+  }
+}

@@ -1,0 +1,23 @@
+<div class="gallery-container">
+  <div class="main-image">
+    <img src="{{ mainImageUrl }}" alt="Main Image" />
+  </div>
+
+  <button class="arrow left" (click)="scrollLeft()">&#10094;</button>
+
+  <div class="thumbnails" #thumbnailsContainer>
+    <div
+      class="image-container"
+      *ngFor="let imageUrl of images; let i = index"
+      (click)="setMainImage(imageUrl)"
+      [class.selected]="imageUrl === mainImageUrl"
+    >
+      <img [src]="imageUrl" alt="Gallery thumbnail" />
+    </div>
+  </div>
+
+  <button class="arrow right" (click)="scrollRight()">&#10095;</button>
+  <div *ngIf="images.length > 0" class="photo-count">
+    {{ images.length }} photos
+  </div>
+</div>

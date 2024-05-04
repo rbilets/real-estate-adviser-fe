@@ -1,0 +1,30 @@
+<mat-toolbar color="primary">
+  <button
+    mat-flat-button
+    color="primary"
+    [routerLink]="['/home']"
+    routerLinkActive="router-link-active"
+  >
+    EstateAdvisor
+  </button>
+
+  <div class="menu-container">
+    <button
+      mat-button
+      color="primary"
+      [routerLink]="['/charts']"
+      routerLinkActive="router-link-active"
+    >
+      Charts
+    </button>
+    <button
+      mat-button
+      color="primary"
+      [routerLink]="['/locations']"
+      routerLinkActive="router-link-active"
+    >
+      Locations
+    </button>
+  </div>
+</mat-toolbar>
+<router-outlet></router-outlet>

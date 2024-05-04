@@ -1,0 +1,82 @@
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+
+<div class="content-container">
+  <div [formGroup]="formFilters" class="form-filter-container">
+    <mat-form-field class="location-field">
+      <mat-label>Choose city</mat-label>
+      <mat-select formControlName="location">
+        <mat-option *ngFor="let location of locationOptions" [value]="location">
+          {{ location.location }}
+        </mat-option>
+        <mat-option [value]="'new'">
+          Don't see the city you want? Add the new one!
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="styleOptions.length" class="style-field">
+      <mat-label>Style</mat-label>
+      <mat-select formControlName="style">
+        <mat-option *ngFor="let style of styleOptions" [value]="style">
+          {{ style }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="filter-container" *ngIf="formFilters.controls.location.value">
+      <mat-form-field>
+        <mat-label>Min beds</mat-label>
+        <input matInput formControlName="min_beds" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Max beds</mat-label>
+        <input matInput formControlName="max_beds" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Min baths</mat-label>
+        <input matInput formControlName="min_baths" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Max baths</mat-label>
+        <input matInput formControlName="max_baths" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Min sqft</mat-label>
+        <input matInput formControlName="min_sqft" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Max sqft</mat-label>
+        <input matInput formControlName="max_sqft" type="number" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Min stories</mat-label>
+        <input matInput formControlName="min_stories" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Max stories</mat-label>
+        <input matInput formControlName="max_stories" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Year built</mat-label>
+        <input matInput formControlName="year_built" type="number" />
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" (click)="loadChartData()">
+        Apply
+      </button>
+    </div>
+  </div>
+
+  <canvasjs-chart
+    *ngIf="chartOptions.data[0].dataPoints.length > 1"
+    [options]="chartOptions"
+    (chartInstance)="getChartInstance($event)"
+  ></canvasjs-chart>
+</div>

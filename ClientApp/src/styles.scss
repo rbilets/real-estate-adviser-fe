@@ -1,0 +1,11 @@
+@import "custom-theme.scss";
+
+mat-toolbar{
+  background-color: transparent !important;
+  color: red !important
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

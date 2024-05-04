@@ -1,0 +1,78 @@
+<h2 mat-dialog-title>
+  {{ data.street }} {{ data.unit }}, {{ data.city }}, {{ data.state }}
+  {{ data.zip_code }}
+</h2>
+
+<mat-dialog-content class="mat-typography">
+  <image-gallery [images]="allPhotos"></image-gallery>
+
+  <div class="property-content">
+    <div>
+      <h3>Details</h3>
+
+      <p><strong>Status:</strong> {{ data.status }}</p>
+      <p><strong>List Date:</strong> {{ data.list_date | date }}</p>
+      <p><strong>Last Sold Date:</strong> {{ data.last_sold_date | date }}</p>
+
+      <p><strong>Price:</strong> {{ data.list_price | currency }}</p>
+      <p>
+        <strong>Price per sqft:</strong> {{ data.price_per_sqft | currency }}
+      </p>
+      <p><strong>Hoa fee:</strong> {{ data.hoa_fee | currency }}</p>
+      <p><strong>Style:</strong> {{ data.style }}</p>
+      <p><strong>Beds:</strong> {{ data.beds }}</p>
+      <p><strong>Full baths:</strong> {{ data.full_baths }}</p>
+      <p><strong>Half baths:</strong> {{ data.half_baths }}</p>
+      <p><strong>Sq Ft:</strong> {{ data.sqft }}</p>
+      <p><strong>Year Built:</strong> {{ data.year_built }}</p>
+      <p><strong>Stories:</strong> {{ data.stories }}</p>
+      <p><strong>Parking garage:</strong> {{ data.parking_garage }}</p>
+      <p>
+        <strong>Distance to downtown:</strong>
+        {{ data.distance_to_downtown }} km
+      </p>
+      <p>
+        <strong>View listing:</strong>
+        <a [href]="data.property_url"> {{ data.property_url }}</a>
+      </p>
+    </div>
+
+    <div class="price-prediction">
+      <h3>Price Prediction</h3>
+      <table mat-table [dataSource]="data.predicted_prices">
+        <ng-container matColumnDef="year">
+          <th mat-header-cell *matHeaderCellDef>Year</th>
+          <td mat-cell *matCellDef="let element">{{ element.sold_year }}</td>
+        </ng-container>
+        <ng-container matColumnDef="predicted_price">
+          <th mat-header-cell *matHeaderCellDef>Predicted Price</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.sold_price | currency }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="percentage_increase">
+          <th mat-header-cell *matHeaderCellDef>Percentage Increase</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.percentage.toFixed(2) }}%
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="['year', 'predicted_price', 'percentage_increase']"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="
+            let row;
+            columns: ['year', 'predicted_price', 'percentage_increase']
+          "
+        ></tr>
+      </table>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-stroked-button color="primary" mat-dialog-close>Close</button>
+</mat-dialog-actions>

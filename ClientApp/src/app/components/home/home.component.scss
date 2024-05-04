@@ -1,0 +1,42 @@
+.banner-container {
+  position: relative;
+  top: -65px;
+  height: 700px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../../assets/img-2.jpg");
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+mat-progress-bar {
+  top: -65px;
+}
+
+.promotional-container {
+  h1 {
+    color: white;
+  }
+  margin: 50px;
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  mat-form-field {
+    width: 350px;
+  }
+}
+
+.home-content {
+  margin: 0 50px;
+
+  .info-container {
+    display: flex;
+    gap: 20px;
+  }
+}

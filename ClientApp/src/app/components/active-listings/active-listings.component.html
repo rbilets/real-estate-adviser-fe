@@ -1,0 +1,118 @@
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+
+<div class="header-container">
+  <h2>Active Listings for {{ location }}</h2>
+  <div class="filter-container" [formGroup]="formFilters">
+    <mat-form-field>
+      <mat-label>Min price</mat-label>
+      <input matInput placeholder="10000" formControlName="minPrice" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Max price</mat-label>
+      <input matInput placeholder="10000" formControlName="maxPrice" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Predict Year</mat-label>
+      <mat-select formControlName="predictYear">
+        <mat-option *ngFor="let el of predictedYearOptions" [value]="el">
+          {{ el }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Show Amout</mat-label>
+      <input matInput formControlName="amount" />
+    </mat-form-field>
+  </div>
+</div>
+<div class="listings-container">
+  <div class="map" id="map" class="map-container"></div>
+
+  <div>
+    <div class="table-container">
+      <table
+        mat-table
+        [dataSource]="dataSource?.data || []"
+        class="mat-elevation-z8"
+      >
+        <!-- Address Column -->
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef>Address</th>
+          <td mat-cell *matCellDef="let listing">
+            {{ listing.street }}, {{ listing.city }}, {{ listing.state }}
+            {{ listing.zip_code }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="baths">
+          <th mat-header-cell *matHeaderCellDef>Baths</th>
+          <td mat-cell *matCellDef="let listing">
+            {{ listing.baths }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="beds">
+          <th mat-header-cell *matHeaderCellDef>Beds</th>
+          <td mat-cell *matCellDef="let listing">
+            {{ listing.beds }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sqft">
+          <th mat-header-cell *matHeaderCellDef>Sqft</th>
+          <td mat-cell *matCellDef="let listing">
+            {{ listing.sqft }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="year_built">
+          <th mat-header-cell *matHeaderCellDef>Year Built</th>
+          <td mat-cell *matCellDef="let listing">
+            {{ listing.year_built }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="stories">
+          <th mat-header-cell *matHeaderCellDef>Stories</th>
+          <td mat-cell *matCellDef="let listing">
+            {{ listing.stories }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="list_price">
+          <th mat-header-cell *matHeaderCellDef>List Price</th>
+          <td mat-cell *matCellDef="let listing">
+            {{ listing.list_price }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sort_percentage">
+          <th mat-header-cell *matHeaderCellDef>Percentage difference</th>
+          <td mat-cell *matCellDef="let listing">
+            {{ listing.sort_percentage.toFixed(2) }}%
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          (click)="openListing(row)"
+        ></tr>
+      </table>
+    </div>
+    <mat-paginator
+      [pageSizeOptions]="[25, 50, 100]"
+      [pageSize]="25"
+      [length]="allActiveListings.length"
+      (page)="onPageChange($event)"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

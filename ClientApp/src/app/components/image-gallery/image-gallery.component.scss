@@ -1,0 +1,77 @@
+.gallery-container {
+  position: relative;
+
+  .main-image {
+    position: relative;
+    text-align: center;
+    img {
+      max-height: 400px; // Set a max height or use a value that fits your design
+      object-fit: cover;
+    }
+  }
+
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff; // Use a background that makes the arrow visible
+    border: 1px solid #ddd; // Style as needed
+    border-radius: 50%;
+    width: 30px; // Arrow size
+    height: 30px; // Arrow size
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    &:hover {
+      background-color: #f0f0f0; // Hover effect
+    }
+  }
+
+  .left {
+    left: 0;
+  }
+
+  .right {
+    right: 0;
+  }
+
+  .thumbnails {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 0;
+    margin: 0 35px; // Make room for arrows
+
+    .image-container {
+      display: inline-block;
+      width: 100px; // Thumbnail width
+      height: auto;
+      margin-right: 10px; // Space between thumbnails
+      img {
+        width: 100%;
+        object-fit: cover;
+        height: 70px;
+        cursor: pointer;
+      }
+      &.selected img {
+        border: 2px solid blue; // Highlight color for selected thumbnail
+      }
+    }
+  }
+
+  .photo-count {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    button {
+      cursor: pointer;
+    }
+  }
+}
