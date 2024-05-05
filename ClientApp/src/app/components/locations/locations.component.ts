@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
 
 @Component({
   selector: 'app-locations',
@@ -54,8 +55,17 @@ export class LocationsComponent implements OnInit {
       width: '300px',
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      this.loadLocations();
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res){
+        this.dialog.open(NotificationDialogComponent, {
+          data: {
+            textToDisplay: 'The city is being added to your locations. It might take some time. You can continue using the app.',
+          },
+        }).afterClosed().subscribe(() => {
+          this.loadLocations()
+        })
+      }
+      
     });
   }
 
@@ -70,7 +80,18 @@ export class LocationsComponent implements OnInit {
     );
   }
 
-  refreshLocations(): void {
-    this.loadLocations();
+  refreshLocations(locationData: LocationData): void {
+    this.dialog.open(NotificationDialogComponent, {
+      data: {
+        textToDisplay: 'The location is being updated. It might take some time. You can continue using the app.',
+      },
+    }).afterClosed().subscribe(() => {
+      this.dataService.addLocation(locationData.location).subscribe(
+        () => {
+          this.loadLocations();
+        },
+        (error) => (this.loading = false)
+      );
+    })
   }
 }

@@ -1,9 +1,9 @@
 .banner-container {
   position: relative;
   top: -65px;
-  height: 700px;
+  height: calc(100vh - 430px);
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../../../assets/img-2.jpg");
+    url("../../../assets/img-1.jpg");
   background-size: cover;
   background-position: center;
 
@@ -33,10 +33,33 @@ mat-progress-bar {
 }
 
 .home-content {
-  margin: 0 50px;
+  padding: 0 15% 65px 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 100px;
 
-  .info-container {
-    display: flex;
-    gap: 20px;
+  h3{
+    font-size: 36px;
+  }
+  p {
+    font-size: 16px;
+    line-height: 30px;
+
+  }
+  img{
+    height: 300px;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .home-content{
+    flex-direction: column;
+    gap: 40px;
+
+    img{
+      height: auto;
+      width: 100%;
+    }
   }
 }

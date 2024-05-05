@@ -42,10 +42,11 @@ export class AddLocationDialogComponent {
     if (this.locationControl.valid) {
       this.loading = true;
       const location = this.locationControl.value;
+      this.loading = false;
+      this.dialogRef.close();
+
       this.dataService.addLocation(location).subscribe({
         next: (res) => {
-          this.loading = false;
-          this.dialogRef.close();
         },
         error: (error) => {
           this.loading = false;
